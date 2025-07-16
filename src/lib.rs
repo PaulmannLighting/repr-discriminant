@@ -28,6 +28,7 @@ pub fn repr_discriminant(args: TokenStream, input: TokenStream) -> TokenStream {
     let body = match input.data {
         Data::Enum(_) => {
             quote! {
+                /// Returns the discriminant value of the enum.
                 pub const fn #method_name(&self) -> #typ {
                     // SAFETY: The macro guarantees that the enum is repr(#typ).
                     #[allow(unsafe_code)]
