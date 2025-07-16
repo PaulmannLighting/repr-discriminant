@@ -4,6 +4,12 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = "2.0"
+
+[lib]
+proc-macro = true
 
 [lints.rust]
 absolute_paths_not_starting_with_crate = "warn"
