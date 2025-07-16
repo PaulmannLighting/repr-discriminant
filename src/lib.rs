@@ -2,10 +2,10 @@
 
 use proc_macro::TokenStream;
 use proc_macro2::Span;
-use quote::{quote};
+use quote::quote;
 use syn::parse::{Parse, ParseStream};
 use syn::token::Comma;
-use syn::{Data, DeriveInput, Ident, Type, parse_macro_input};
+use syn::{parse_macro_input, Data, DeriveInput, Ident, Type};
 
 const DEFAULT_DISCRIMINANT_METHOD_NAME: &str = "discriminant";
 
@@ -22,6 +22,8 @@ pub fn repr_discriminant(args: TokenStream, input: TokenStream) -> TokenStream {
         .method_name
         .unwrap_or_else(|| Ident::new(DEFAULT_DISCRIMINANT_METHOD_NAME, Span::call_site()));
     let input: DeriveInput = parse_macro_input!(input as DeriveInput);
+    let generics = &input.generics;
+    let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     let name = &input.ident;
     let body = match input.data {
         Data::Enum(_) => {
@@ -42,11 +44,12 @@ pub fn repr_discriminant(args: TokenStream, input: TokenStream) -> TokenStream {
         #[repr(#typ)]
         #input
 
-        impl #name {
+        impl #impl_generics #name #ty_generics #where_clause {
             #body
         }
     })
 }
+
 
 /// Arguments for the `repr_discriminant` macro.
 struct Args {
