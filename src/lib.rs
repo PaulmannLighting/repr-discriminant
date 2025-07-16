@@ -29,8 +29,11 @@ pub fn repr_discriminant(args: TokenStream, input: TokenStream) -> TokenStream {
         Data::Enum(_) => {
             quote! {
                 /// Returns the discriminant value of the enum.
+                ///
+                /// # Safety
+                ///
+                /// This method is safe, because the macro guarantees that the enum is repr(#typ).
                 pub const fn #method_name(&self) -> #typ {
-                    // SAFETY: The macro guarantees that the enum is repr(#typ).
                     #[allow(unsafe_code)]
                     unsafe {
                         *::core::ptr::from_ref(self)
