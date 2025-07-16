@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "repr-derive"
+name = "repr-discriminant"
 version = "0.1.0"
 dependencies = [
  "proc-macro2",

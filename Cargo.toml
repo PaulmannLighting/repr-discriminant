@@ -1,5 +1,5 @@
 [package]
-name = "repr-derive"
+name = "repr-discriminant"
 version = "0.1.0"
 edition = "2024"
 

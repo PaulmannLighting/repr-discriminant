@@ -2,7 +2,7 @@
 
 use proc_macro::TokenStream;
 use proc_macro2::Span;
-use quote::{ToTokens, quote};
+use quote::{quote};
 use syn::parse::{Parse, ParseStream};
 use syn::token::Comma;
 use syn::{Data, DeriveInput, Ident, Type, parse_macro_input};
@@ -38,16 +38,13 @@ pub fn repr_discriminant(args: TokenStream, input: TokenStream) -> TokenStream {
         _ => unimplemented!(),
     };
 
-    let mut tokens = quote! {
+    TokenStream::from(quote! {
         #[repr(#typ)]
-    };
-    tokens.extend(input.to_token_stream());
-    tokens.extend(quote! {
+        #input
         impl #name {
             #body
         }
-    });
-    TokenStream::from(tokens)
+    })
 }
 
 /// Arguments for the `repr_discriminant` macro.
