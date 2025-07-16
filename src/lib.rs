@@ -41,6 +41,7 @@ pub fn repr_discriminant(args: TokenStream, input: TokenStream) -> TokenStream {
     TokenStream::from(quote! {
         #[repr(#typ)]
         #input
+
         impl #name {
             #body
         }
