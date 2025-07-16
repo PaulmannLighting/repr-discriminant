@@ -30,6 +30,7 @@ pub fn repr_discriminant(args: TokenStream, input: TokenStream) -> TokenStream {
             quote! {
                 pub const fn #method_name(&self) -> #typ {
                     // SAFETY: The macro guarantees that the enum is repr(#typ).
+                    #[allow(unsafe_code)]
                     unsafe {
                         *::core::ptr::from_ref(self)
                             .cast::<#typ>()
