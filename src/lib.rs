@@ -74,10 +74,15 @@ impl Parse for Args {
         };
 
         let _: Comma = input.parse()?;
+        let method_name = input.parse()?;
+
+        if !input.is_empty() {
+            return Err(input.error("Unexpected tokens after method name"));
+        }
 
         Ok(Self {
             typ,
-            method_name: Some(input.parse()?),
+            method_name,
         })
     }
 }
