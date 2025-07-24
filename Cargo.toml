@@ -1,6 +1,6 @@
 [package]
 name = "repr-discriminant"
-version = "1.0.0"
+version = "1.0.1"
 description = "Derive macro to generate a method to access the discriminant of an enum variant with a repr(T) at runtime"
 authors = ["Richard Neumann <neumann@paulmann.de>"]
 license = "MIT"
