@@ -1,7 +1,7 @@
 [package]
 name = "repr-discriminant"
-version = "0.1.1"
-description = "Attribute macro to access the discriminant of an enum variant with a repr(T) at runtime"
+version = "1.0.0"
+description = "Derive macro to generate a method to access the discriminant of an enum variant with a repr(T) at runtime"
 authors = ["Richard Neumann <neumann@paulmann.de>"]
 license = "MIT"
 repository = "https://github.com/PaulmannLighting/repr-discriminant"
@@ -11,7 +11,6 @@ exclude = [".gitignore"]
 edition = "2024"
 
 [dependencies]
-proc-macro2 = "1.0"
 quote = "1.0"
 syn = "2.0"
 

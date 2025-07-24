@@ -22,9 +22,8 @@ dependencies = [
 
 [[package]]
 name = "repr-discriminant"
-version = "0.1.1"
+version = "1.0.0"
 dependencies = [
- "proc-macro2",
  "quote",
  "syn",
 ]
