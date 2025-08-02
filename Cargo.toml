@@ -6,6 +6,7 @@ authors = ["Richard Neumann <neumann@paulmann.de>"]
 license = "MIT"
 repository = "https://github.com/PaulmannLighting/repr-discriminant"
 documentation = "https://docs.rs/repr-discriminant"
+categories = ["rust-patterns"]
 keywords = ["enum", "discriminant", "repr", "attribute", "macro"]
 exclude = [".gitignore"]
 edition = "2024"
