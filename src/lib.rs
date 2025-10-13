@@ -41,6 +41,6 @@ pub fn repr_discriminant(input: TokenStream) -> TokenStream {
         }
         .into()
     } else {
-        unimplemented!()
+        unimplemented!("`ReprDiscriminant` can only be derived for enums")
     }
 }
