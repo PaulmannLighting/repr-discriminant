@@ -22,26 +22,25 @@ pub fn repr_discriminant(input: TokenStream) -> TokenStream {
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     let name = &input.ident;
 
-    match input.data {
-        Data::Enum(_) => {
-            quote! {
-                impl #impl_generics #name #ty_generics #where_clause {
-                    /// Returns the discriminant value of the enum.
-                    ///
-                    /// # Safety
-                    ///
-                    /// This method is safe, because the macro guarantees that the enum is repr(T).
-                    pub const fn discriminant(&self) -> #repr_type {
-                        #[allow(unsafe_code)]
-                        unsafe {
-                            *::core::ptr::from_ref(self)
-                                .cast::<#repr_type>()
-                        }
+    if let Data::Enum(_) = input.data {
+        quote! {
+            impl #impl_generics #name #ty_generics #where_clause {
+                /// Returns the discriminant value of the enum.
+                ///
+                /// # Safety
+                ///
+                /// This method is safe, because the macro guarantees that the enum is repr(T).
+                pub const fn discriminant(&self) -> #repr_type {
+                    #[allow(unsafe_code)]
+                    unsafe {
+                        *::core::ptr::from_ref(self)
+                            .cast::<#repr_type>()
                     }
                 }
             }
-            .into()
         }
-        _ => unimplemented!(),
+        .into()
+    } else {
+        unimplemented!()
     }
 }
