@@ -21,6 +21,7 @@ pub fn repr_discriminant(input: TokenStream) -> TokenStream {
     let generics = &input.generics;
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     let name = &input.ident;
+
     match input.data {
         Data::Enum(_) => {
             quote! {
