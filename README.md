@@ -8,20 +8,20 @@ Derive macro to add primitive representations to enums and allow parsing their d
 use repr_discriminant::ReprDiscriminant;
 
 #[repr(u8)]
-#[derive(ReprDiscriminant, Debug, PartialEq, Eq)]
+#[derive(ReprDiscriminant)]
 enum TestEnum {
-    A = 1,
-    B = 2,
-    C = 3,
+    Foo = 1,
+    Bar(usize, f64) = 2,
+    Spam { x: i32, y: i32 } = 3,
 }
 
 fn main() {
-    let a = TestEnum::A;
-    let b = TestEnum::B;
-    let c = TestEnum::C;
+    let foo = TestEnum::Foo;
+    let bar = TestEnum::Bar(4, 5.1);
+    let spam = TestEnum::Spam { x: -32, y: 1337 };
 
-    assert_eq!(a.discriminant(), 1);
-    assert_eq!(b.discriminant(), 2);
-    assert_eq!(c.discriminant(), 3);
+    assert_eq!(foo.discriminant(), 1);
+    assert_eq!(bar.discriminant(), 2);
+    assert_eq!(spam.discriminant(), 3);
 }
 ```
