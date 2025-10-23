@@ -18,6 +18,16 @@ pub fn repr_discriminant(input: TokenStream) -> TokenStream {
         .filter(|attr| attr.path().is_ident("repr"))
         .find_map(|attr| attr.parse_args().ok())
         .expect("`#[repr(T)]` is required");
+
+    assert_ne!(
+        repr_type, "C",
+        "`ReprDiscriminant` cannot be used with `repr(C)`"
+    );
+    assert_ne!(
+        repr_type, "transparent",
+        "`ReprDiscriminant` cannot be used with `repr(transparent)`"
+    );
+
     let generics = &input.generics;
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     let name = &input.ident;
