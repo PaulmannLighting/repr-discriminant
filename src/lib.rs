@@ -4,7 +4,7 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{Data, DeriveInput, Ident, parse_macro_input};
 
-const UNSUPPORTED_REPRESENTATIONS: &[&str] = &["C", "transparent"];
+const UNSUPPORTED_REPRESENTATIONS: &[&str] = &["C", "packed", "transparent"];
 
 /// Attribute macro to implement a discriminant method for enums with a specific representation type.
 ///
