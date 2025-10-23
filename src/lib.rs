@@ -4,6 +4,8 @@ use proc_macro::TokenStream;
 use quote::quote;
 use syn::{Data, DeriveInput, Ident, parse_macro_input};
 
+const UNSUPPORTED_REPRESENTATIONS: &[&str] = &["C", "transparent"];
+
 /// Attribute macro to implement a discriminant method for enums with a specific representation type.
 ///
 /// # Panics
@@ -19,14 +21,12 @@ pub fn repr_discriminant(input: TokenStream) -> TokenStream {
         .find_map(|attr| attr.parse_args().ok())
         .expect("`#[repr(T)]` is required");
 
-    assert_ne!(
-        repr_type, "C",
-        "`ReprDiscriminant` cannot be used with `repr(C)`"
-    );
-    assert_ne!(
-        repr_type, "transparent",
-        "`ReprDiscriminant` cannot be used with `repr(transparent)`"
-    );
+    for &unsupported in UNSUPPORTED_REPRESENTATIONS {
+        assert_ne!(
+            repr_type, unsupported,
+            "`ReprDiscriminant` cannot be used with `repr({unsupported})`"
+        );
+    }
 
     let generics = &input.generics;
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
