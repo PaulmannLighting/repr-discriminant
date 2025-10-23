@@ -18,7 +18,7 @@ fn test_repr_discriminant() {
     let bar = TestEnum::Bar(4, 5.1);
     let spam = TestEnum::Spam { x: -32, y: 1337 };
 
-    assert_eq!(foo.discriminant(), 1);
-    assert_eq!(bar.discriminant(), 2);
-    assert_eq!(spam.discriminant(), 3);
+    assert_eq!(foo.discriminant(), 1u8);
+    assert_eq!(bar.discriminant(), 2u8);
+    assert_eq!(spam.discriminant(), 3u8);
 }
