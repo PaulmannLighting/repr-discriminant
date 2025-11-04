@@ -1,6 +1,6 @@
 [package]
 name = "repr-discriminant"
-version = "2.0.0"
+version = "2.0.1"
 edition = "2024"
 description = "Trait to retrieve the discriminant of an enum variant with a repr(T) at runtime"
 authors = ["Richard Neumann <neumann@paulmann.de>"]
