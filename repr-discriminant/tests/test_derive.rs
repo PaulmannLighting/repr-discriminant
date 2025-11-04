@@ -1,7 +1,9 @@
 //! Tests for the `ReprDiscriminant` derive macro.
-
 #![cfg(test)]
+#![cfg(feature = "derive")]
+
 use repr_discriminant::ReprDiscriminant;
+use repr_discriminant_derive::ReprDiscriminant;
 
 #[test]
 #[allow(dead_code)]
@@ -18,7 +20,7 @@ fn test_repr_discriminant() {
     let bar = TestEnum::Bar(4, 5.1);
     let spam = TestEnum::Spam { x: -32, y: 1337 };
 
-    assert_eq!(foo.discriminant(), 1u8);
-    assert_eq!(bar.discriminant(), 2u8);
-    assert_eq!(spam.discriminant(), 3u8);
+    assert_eq!(foo.repr_discriminant(), 1u8);
+    assert_eq!(bar.repr_discriminant(), 2u8);
+    assert_eq!(spam.repr_discriminant(), 3u8);
 }
