@@ -82,7 +82,7 @@ fn impl_trait(
         impl #impl_generics ::repr_discriminant::ReprDiscriminant for #name #ty_generics #where_clause {
             type Repr = #repr_type;
 
-            pub fn repr_discriminant(&self) -> Self::Repr {
+            fn repr_discriminant(&self) -> Self::Repr {
                 self.discriminant()
             }
         }
