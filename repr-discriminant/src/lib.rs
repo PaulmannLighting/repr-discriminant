@@ -9,5 +9,5 @@ pub trait ReprDiscriminant {
     fn repr_discriminant(&self) -> Self::Repr;
 }
 
-#[cfg_attr(feature = "derive")]
+#[cfg(feature = "derive")]
 pub use repr_discriminant_derive::ReprDiscriminant;
