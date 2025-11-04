@@ -1,6 +1,10 @@
-# repr-discriminant
+# repr-discriminant-derive
 
-Derive macro and trait to add primitive representations to enums and allow parsing their discriminant.
+Derive macro to add primitive representations to enums and allow parsing their discriminant.
+
+## Requirements
+
+Requires `repr-discriminant` to be available in the user code.
 
 ## Usage
 
