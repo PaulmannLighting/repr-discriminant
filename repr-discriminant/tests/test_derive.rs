@@ -4,22 +4,31 @@
 
 use repr_discriminant::ReprDiscriminant;
 
+#[repr(u8)]
+#[derive(ReprDiscriminant)]
+#[allow(dead_code)]
+enum TestEnum {
+    Foo = 1,
+    Bar(usize, f64) = 2,
+    Spam { x: i32, y: i32 } = 3,
+}
+
+const FOO: TestEnum = TestEnum::Foo;
+const BAR: TestEnum = TestEnum::Bar(4, 5.1);
+const SPAM: TestEnum = TestEnum::Spam { x: -32, y: 1337 };
+
 #[test]
 #[allow(dead_code)]
-fn test_repr_discriminant() {
-    #[repr(u8)]
-    #[derive(ReprDiscriminant)]
-    enum TestEnum {
-        Foo = 1,
-        Bar(usize, f64) = 2,
-        Spam { x: i32, y: i32 } = 3,
-    }
+fn test_const_discriminant() {
+    assert_eq!(FOO.discriminant(), 1u8);
+    assert_eq!(BAR.discriminant(), 2u8);
+    assert_eq!(SPAM.discriminant(), 3u8);
+}
 
-    let foo = TestEnum::Foo;
-    let bar = TestEnum::Bar(4, 5.1);
-    let spam = TestEnum::Spam { x: -32, y: 1337 };
-
-    assert_eq!(foo.repr_discriminant(), 1u8);
-    assert_eq!(bar.repr_discriminant(), 2u8);
-    assert_eq!(spam.repr_discriminant(), 3u8);
+#[test]
+#[allow(dead_code)]
+fn test_trait_discriminant() {
+    assert_eq!(FOO.repr_discriminant(), 1u8);
+    assert_eq!(BAR.repr_discriminant(), 2u8);
+    assert_eq!(SPAM.repr_discriminant(), 3u8);
 }
