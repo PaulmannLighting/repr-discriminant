@@ -1,10 +1,10 @@
 [package]
 name = "repr-discriminant"
-version = "0.1.0"
+version = "2.0.0"
 edition = "2024"
 
 [dependencies]
-repr-discriminant-derive = { version = "1.1.0", optional = true, path = "../repr-discriminant-derive" }
+repr-discriminant-derive = { version = "1.1.0", optional = true }
 
 [features]
 derive = ["dep:repr-discriminant-derive"]
