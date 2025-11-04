@@ -1,24 +1,8 @@
-[package]
-name = "repr-discriminant"
-version = "1.1.0"
-description = "Derive macro to generate a method to access the discriminant of an enum variant with a repr(T) at runtime"
-authors = ["Richard Neumann <neumann@paulmann.de>"]
-license = "MIT"
-repository = "https://github.com/PaulmannLighting/repr-discriminant"
-documentation = "https://docs.rs/repr-discriminant"
-categories = ["rust-patterns"]
-keywords = ["enum", "discriminant", "repr", "attribute", "macro"]
-exclude = [".gitignore"]
-edition = "2024"
+[workspace]
+members = ["repr-discriminant", "repr-discriminant-derive"]
+resolver = "3"
 
-[dependencies]
-quote = "1.0"
-syn = "2.0"
-
-[lib]
-proc-macro = true
-
-[lints.rust]
+[workspace.lints.rust]
 absolute_paths_not_starting_with_crate = "warn"
 elided_lifetimes_in_paths = "warn"
 keyword_idents = { level = "warn", priority = -1 }
@@ -37,7 +21,7 @@ variant_size_differences = "warn"
 for_loops_over_fallibles = "warn"
 redundant_lifetimes = "warn"
 
-[lints.clippy]
+[workspace.lints.clippy]
 pedantic = { level = "warn", priority = -90 }
 nursery = { level = "warn", priority = -95 }
 perf = { level = "warn", priority = -95 }

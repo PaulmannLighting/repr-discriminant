@@ -1,0 +1,13 @@
+[package]
+name = "repr-discriminant"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+repr-discriminant-derive = { version = "1.1.0", optional = true, path = "../repr-discriminant-derive" }
+
+[features]
+derive = ["dep:repr-discriminant-derive"]
+
+[lints]
+workspace = true
