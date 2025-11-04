@@ -3,7 +3,6 @@
 #![cfg(feature = "derive")]
 
 use repr_discriminant::ReprDiscriminant;
-use repr_discriminant_derive::ReprDiscriminant;
 
 #[test]
 #[allow(dead_code)]

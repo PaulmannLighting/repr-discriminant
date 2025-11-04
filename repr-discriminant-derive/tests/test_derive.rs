@@ -1,7 +1,7 @@
 //! Tests for the `ReprDiscriminant` derive macro.
 #![cfg(test)]
 
-use repr_discriminant_derive::ReprDiscriminant;
+use repr_discriminant::ReprDiscriminant;
 
 #[test]
 #[allow(dead_code)]
