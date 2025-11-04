@@ -38,9 +38,9 @@ fn test_trait_discriminant() {
 #[test]
 #[allow(dead_code)]
 fn test_generic() {
-    assert_discriminant(FOO, 1u8);
-    assert_discriminant(BAR, 2u8);
-    assert_discriminant(SPAM, 3u8);
+    assert_discriminant(FOO, 1);
+    assert_discriminant(BAR, 2);
+    assert_discriminant(SPAM, 3);
 }
 
 fn assert_discriminant<T, U>(value: T, expected: U)
