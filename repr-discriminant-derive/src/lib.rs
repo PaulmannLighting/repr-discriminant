@@ -79,14 +79,9 @@ fn impl_trait(
     repr_type: &Ident,
 ) -> proc_macro2::TokenStream {
     quote! {
-        type Repr = #repr_type;
-
         impl #impl_generics ::repr_discriminant::ReprDiscriminant for #name #ty_generics #where_clause {
-            /// Returns the discriminant value of the enum.
-            ///
-            /// # Safety
-            ///
-            /// This method is safe, because the macro guarantees that the enum is repr(T).
+            type Repr = #repr_type;
+
             pub fn repr_discriminant(&self) -> Self::Repr {
                 self.discriminant()
             }
