@@ -43,10 +43,9 @@ fn test_generic() {
     assert_discriminant(SPAM, 3);
 }
 
-fn assert_discriminant<T, U>(value: T, expected: U)
+fn assert_discriminant<T>(value: T, expected: T::Repr)
 where
-    T: ReprDiscriminant<Repr = U>,
-    U: PartialEq + Debug,
+    T: ReprDiscriminant<Repr: Debug + PartialEq>,
 {
     assert_eq!(value.repr_discriminant(), expected);
 }
