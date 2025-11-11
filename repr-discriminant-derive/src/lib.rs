@@ -18,6 +18,11 @@ const SUPPORTED_TYPES: &[&str] = &[
 #[proc_macro_derive(ReprDiscriminant)]
 pub fn repr_discriminant(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
+
+    let Data::Enum(_) = input.data else {
+        unimplemented!("`ReprDiscriminant` can only be derived for enums")
+    };
+
     let repr_type: Type = input
         .attrs
         .iter()
@@ -30,21 +35,31 @@ pub fn repr_discriminant(input: TokenStream) -> TokenStream {
         "`ReprDiscriminant` can only be used with the following types: {SUPPORTED_TYPES:?}"
     );
 
-    let generics = &input.generics;
-    let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
-    let name = &input.ident;
+    let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
+    impl_all(
+        &impl_generics,
+        &input.ident,
+        &ty_generics,
+        where_clause,
+        &repr_type,
+    )
+    .into()
+}
 
-    if let Data::Enum(_) = input.data {
-        let const_impl = impl_const(&impl_generics, name, &ty_generics, where_clause, &repr_type);
-        let trait_impl = impl_trait(&impl_generics, name, &ty_generics, where_clause, &repr_type);
-        quote! {
-            #const_impl
+fn impl_all(
+    impl_generics: &ImplGenerics<'_>,
+    name: &Ident,
+    ty_generics: &TypeGenerics<'_>,
+    where_clause: Option<&WhereClause>,
+    repr_type: &Type,
+) -> proc_macro2::TokenStream {
+    let const_impl = impl_const(impl_generics, name, ty_generics, where_clause, repr_type);
+    let trait_impl = impl_trait(impl_generics, name, ty_generics, where_clause, repr_type);
 
-            #trait_impl
-        }
-        .into()
-    } else {
-        unimplemented!("`ReprDiscriminant` can only be derived for enums")
+    quote! {
+        #const_impl
+
+        #trait_impl
     }
 }
 

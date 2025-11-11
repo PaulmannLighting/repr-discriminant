@@ -13,9 +13,9 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.41"
+version = "1.0.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ce25767e7b499d1b604768e7cde645d14cc8584231ea6b295e9c9eb22c02e1d1"
+checksum = "a338cc41d27e6cc6dce6cefc13a0729dfbb81c262b1f519331575dd80ef3067f"
 dependencies = [
  "proc-macro2",
 ]
@@ -24,12 +24,12 @@ dependencies = [
 name = "repr-discriminant"
 version = "2.0.2"
 dependencies = [
- "repr-discriminant-derive 1.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
+ "repr-discriminant-derive 1.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "repr-discriminant-derive"
-version = "1.1.5"
+version = "1.1.6"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -38,9 +38,9 @@ dependencies = [
 
 [[package]]
 name = "repr-discriminant-derive"
-version = "1.1.5"
+version = "1.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f9a3af8d93b62c997e4c5f2403c864aaf45cac2371244d8de384d6f6fbe03ef0"
+checksum = "d898ca9965ccb4d4a6c409c6fcad175aaafd716a871b5ef6a54ab964719ba997"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -49,9 +49,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.108"
+version = "2.0.110"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "da58917d35242480a05c2897064da0a80589a2a0476c9a3f2fdc83b53502e917"
+checksum = "a99801b5bd34ede4cf3fc688c5919368fea4e4814a4664359503e6015b280aea"
 dependencies = [
  "proc-macro2",
  "quote",
