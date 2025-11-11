@@ -1,10 +1,14 @@
 //! Attribute macro to implement a discriminant method for enums with a specific representation type.
 
 use proc_macro::TokenStream;
-use quote::quote;
-use syn::{Data, DeriveInput, Ident, ImplGenerics, TypeGenerics, WhereClause, parse_macro_input};
+use quote::{ToTokens, quote};
+use syn::{
+    Data, DeriveInput, Ident, ImplGenerics, Type, TypeGenerics, WhereClause, parse_macro_input,
+};
 
-const UNSUPPORTED_REPRESENTATIONS: &[&str] = &["C", "packed", "transparent"];
+const SUPPORTED_TYPES: &[&str] = &[
+    "i8", "i16", "i32", "i64", "i128", "isize", "u8", "u16", "u32", "u64", "u128", "usize",
+];
 
 /// Attribute macro to implement a discriminant method for enums with a specific representation type.
 ///
@@ -14,19 +18,17 @@ const UNSUPPORTED_REPRESENTATIONS: &[&str] = &["C", "packed", "transparent"];
 #[proc_macro_derive(ReprDiscriminant)]
 pub fn repr_discriminant(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
-    let repr_type: Ident = input
+    let repr_type: Type = input
         .attrs
         .iter()
         .filter(|attr| attr.path().is_ident("repr"))
         .find_map(|attr| attr.parse_args().ok())
         .expect("`#[repr(T)]` is required");
 
-    for &unsupported in UNSUPPORTED_REPRESENTATIONS {
-        assert_ne!(
-            repr_type, unsupported,
-            "`ReprDiscriminant` cannot be used with `repr({unsupported})`"
-        );
-    }
+    assert!(
+        SUPPORTED_TYPES.contains(&repr_type.to_token_stream().to_string().as_str()),
+        "`ReprDiscriminant` can only be used with the following types: {SUPPORTED_TYPES:?}"
+    );
 
     let generics = &input.generics;
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
@@ -51,7 +53,7 @@ fn impl_const(
     name: &Ident,
     ty_generics: &TypeGenerics<'_>,
     where_clause: Option<&WhereClause>,
-    repr_type: &Ident,
+    repr_type: &Type,
 ) -> proc_macro2::TokenStream {
     quote! {
         impl #impl_generics #name #ty_generics #where_clause {
@@ -76,7 +78,7 @@ fn impl_trait(
     name: &Ident,
     ty_generics: &TypeGenerics<'_>,
     where_clause: Option<&WhereClause>,
-    repr_type: &Ident,
+    repr_type: &Type,
 ) -> proc_macro2::TokenStream {
     quote! {
         impl #impl_generics ::repr_discriminant::ReprDiscriminant for #name #ty_generics #where_clause {
