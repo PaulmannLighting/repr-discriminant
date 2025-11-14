@@ -24,23 +24,12 @@ dependencies = [
 name = "repr-discriminant"
 version = "3.0.1"
 dependencies = [
- "repr-discriminant-derive 2.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "repr-discriminant-derive",
 ]
 
 [[package]]
 name = "repr-discriminant-derive"
 version = "2.0.0"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "repr-discriminant-derive"
-version = "2.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "33893daaa5511425b31abb167913a6c7616dea60d0cd51f335a083c4e21592f0"
 dependencies = [
  "proc-macro2",
  "quote",
