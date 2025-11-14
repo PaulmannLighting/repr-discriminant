@@ -12,7 +12,7 @@ keywords = ["enum", "discriminant", "repr", "attribute"]
 exclude = [".gitignore"]
 
 [dependencies]
-repr-discriminant-derive = { version = "1.1", optional = true }
+repr-discriminant-derive = { version = "1.2", optional = true }
 
 [features]
 derive = ["dep:repr-discriminant-derive"]
