@@ -4,7 +4,7 @@
 ///
 /// # Safety
 ///
-/// The implementor must ensure that the enum is annotated with `#[repr(T)]`
+/// The implementor must ensure that the enum is annotated with `#[repr(Self::Repr)]`
 #[expect(unsafe_code)]
 pub unsafe trait ReprDiscriminant {
     /// The representation type of the discriminant.
