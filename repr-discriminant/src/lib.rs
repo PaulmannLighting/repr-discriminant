@@ -1,7 +1,12 @@
 //! A library to obtain the representation of an enum's discriminant.
 
 /// A trait to obtain the representation of an enum's discriminant.
-pub trait ReprDiscriminant {
+///
+/// # Safety
+///
+/// The implementor must ensure that the enum is annotated with `#[repr(T)]`
+#[expect(unsafe_code)]
+pub unsafe trait ReprDiscriminant {
     /// The representation type of the discriminant.
     type Repr;
 

@@ -96,7 +96,8 @@ fn impl_trait(
     repr_type: &Type,
 ) -> proc_macro2::TokenStream {
     quote! {
-        impl #impl_generics ::repr_discriminant::ReprDiscriminant for #name #ty_generics #where_clause {
+        #[expect(unsafe_code)]
+        unsafe impl #impl_generics ::repr_discriminant::ReprDiscriminant for #name #ty_generics #where_clause {
             type Repr = #repr_type;
 
             fn repr_discriminant(&self) -> Self::Repr {
