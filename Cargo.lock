@@ -22,7 +22,7 @@ dependencies = [
 
 [[package]]
 name = "repr-discriminant"
-version = "2.0.2"
+version = "2.1.0"
 dependencies = [
  "repr-discriminant-derive 1.1.7",
 ]
