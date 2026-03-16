@@ -1,6 +1,5 @@
 //! Tests for the `ReprDiscriminant` derive macro.
-#![cfg(test)]
-#![cfg(feature = "derive")]
+#![cfg(all(test, feature = "derive"))]
 
 use std::fmt::Debug;
 
@@ -8,7 +7,6 @@ use repr_discriminant::ReprDiscriminant;
 
 #[repr(u8)]
 #[derive(ReprDiscriminant)]
-#[allow(dead_code)]
 enum TestEnum {
     Foo = 1,
     Bar(usize, f64) = 2,
@@ -20,7 +18,6 @@ const BAR: TestEnum = TestEnum::Bar(4, 5.1);
 const SPAM: TestEnum = TestEnum::Spam { x: -32, y: 1337 };
 
 #[test]
-#[allow(dead_code)]
 fn test_const_discriminant() {
     assert_eq!(FOO.discriminant(), 1u8);
     assert_eq!(BAR.discriminant(), 2u8);
@@ -28,7 +25,6 @@ fn test_const_discriminant() {
 }
 
 #[test]
-#[allow(dead_code)]
 fn test_trait_discriminant() {
     assert_eq!(FOO.repr_discriminant(), 1u8);
     assert_eq!(BAR.repr_discriminant(), 2u8);
@@ -36,7 +32,6 @@ fn test_trait_discriminant() {
 }
 
 #[test]
-#[allow(dead_code)]
 fn test_generic() {
     assert_discriminant(FOO, 1);
     assert_discriminant(BAR, 2);
