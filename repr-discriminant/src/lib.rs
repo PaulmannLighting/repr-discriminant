@@ -1,5 +1,8 @@
 //! A library to obtain the representation of an enum's discriminant.
 
+#[cfg(feature = "derive")]
+pub use repr_discriminant_derive::ReprDiscriminant;
+
 /// A trait to obtain the representation of an enum's discriminant.
 ///
 /// # Safety
@@ -13,6 +16,3 @@ pub unsafe trait ReprDiscriminant {
     /// Returns the representation of the enum's discriminant.
     fn repr_discriminant(&self) -> Self::Repr;
 }
-
-#[cfg(feature = "derive")]
-pub use repr_discriminant_derive::ReprDiscriminant;
