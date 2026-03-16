@@ -78,7 +78,7 @@ fn impl_const(
             ///
             /// This method is safe, because the macro guarantees that the enum is repr(T).
             pub const fn discriminant(&self) -> #repr_type {
-                #[allow(unsafe_code)]
+                #[expect(unsafe_code)]
                 unsafe {
                     *::core::ptr::from_ref(self)
                         .cast::<#repr_type>()
